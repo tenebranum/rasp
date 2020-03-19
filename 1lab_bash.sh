@@ -61,10 +61,10 @@ if (($# == 0)) || (($1 == "2"))
         du -sh */
         
         echo task 17 -------------------------------
-        du -sh ~/work
+        du -sh ~/work/rasp
         
         echo task 18 -------------------------------
-        du -sch ~/work ~/"Рабочий стол"
+        du -sch ~/work/rasp ~/"Рабочий стол"
 fi
 
 if (($# == 0)) || (($1 == "3"))
@@ -102,7 +102,7 @@ if (($# == 0)) || (($1 == "4"))
         
         echo task 25 -------------------------------
         mkdir manyfiles{10,30}
-        dirs created
+        echo dirs created
         
         echo task 26 -------------------------------
         mkdir manyfiles1
@@ -111,7 +111,7 @@ if (($# == 0)) || (($1 == "4"))
 
         echo task 27 -------------------------------
         mkdir manyfiles2
-        mv -f a{0..100..5} manyfiles2/
+        mv a{0..100..5} manyfiles2/
         echo files moved to manyfiles2
 
         echo task 28 -------------------------------
@@ -132,7 +132,8 @@ if (($# == 0)) || (($1 == "4"))
         echo dir and files created
 
         echo task 32 -------------------------------
-        cp -t ~/tmp/ Toppler/high11 Toppler/low11
+        mkdir ~/tmp
+        cp Toppler/high11 Toppler/low11 ~/tmp
         echo files copied
 
         echo task 33 -------------------------------
@@ -182,10 +183,12 @@ if (($# == 0)) || (($1 == "5"))
         echo task 42 -------------------------------
         VAR2=$VAR1
         VAR2+=" Bash"
+        echo variable created
 
         echo task 43 -------------------------------
         set -o history
         VAR3=$HISTFILESIZE
+        echo variable created
 
         echo task 44-46 ----------------------------
         unset VAR1
@@ -193,7 +196,7 @@ if (($# == 0)) || (($1 == "5"))
         echo "VAR3 = $VAR3"
 fi
 
-if (($# == 0)) || (($# == "6"))
+if (($# == 0)) || (($1 == "6"))
     then
     #6 part
         cd ~/linux_lab1
@@ -209,29 +212,42 @@ if (($# == 0)) || (($# == "6"))
         echo task 49 -----------------------------------
         mkdir grep
         mv -t grep/ grep_month_name.txt grep_other_months.txt
-        echo dir created & files moved
+        echo dir created and files moved
         
         echo task 50 -----------------------------------
         grep -nR 'stud'
 fi
 
-if (($# == 0)) || (($# == "7"))
+if (($# == 0)) || (($1 == "7"))
     then
     #7 part
         echo task 51 -----------------------------------
-        locate bash
-        find / -name "*bash*.*"
+        echo "locate"
+        locate *bash*.*
+        echo "find"
+        find /tmp -name "*bash*.*"
         
         echo task 52 -----------------------------------
-        find / -mtime -1 
+        find /tmp -mtime -1 
         
         echo task 53 -----------------------------------
-        find / -maxdepth 1 -type f -links +1 -printf '%p\n'
+        find /tmp -maxdepth 1 -type f -links +1 -printf '%p\n'
         
         echo task 54 -----------------------------------
         export PS1+="\h "
         
         echo task 55 -----------------------------------
-        rm -R manyfiles
+        rm -R ~/manyfiles
         echo dir removed
+fi
+
+if (($# == 1)) && (($1 == "help"))
+	then
+		echo arg 1 - ls
+		echo arg 2 - df, du
+		echo arg 3 - mkdir
+		echo arg 4 - mkdir, touch
+		echo arg 5 - math operations
+		echo arg 6 - grep
+		echo arg 7 - locate, find
 fi
