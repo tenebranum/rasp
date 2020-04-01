@@ -32,6 +32,7 @@ void Write(){
 void Read(){
     while(count_readers > 0 && count_writers < COUNT){
         if(buffer){
+            cout << buffer << "\n";
             buffer = 0;
             count_readers--;
         }
@@ -53,6 +54,7 @@ void ReadAtomic(){
     while(COUNT_READERS_ATOMIC >= 0){
         mut.lock();
         if(buffer && COUNT_READERS_ATOMIC >= 0){
+            cout << buffer << "\n";
             buffer = 0;
             COUNT_READERS_ATOMIC--;
         }
